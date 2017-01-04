@@ -1,0 +1,55 @@
+<div class="profile">
+	<h2>Player Profile</h2>
+	{{!-- {{jsonPrint this}} --}}
+	<ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a id="dashboard-tab" href="#dashboard-content" aria-controls="dashboard-content" role="tab" data-toggle="tab">Dashboard</a></li>
+	    <li role="presentation"><a id="account-tab" href="#account-content" aria-controls="account-content" role="tab" data-toggle="tab">Profile</a></li>
+	    <li role="presentation" id="map-tab"><a href="#map-content" aria-controls="map-content" role="tab" data-toggle="tab">Map</a></li>
+	</ul>
+
+	<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="dashboard-content">
+
+	    <p>-- DASHBOARD --</p>
+	    {{#ifeq info.playing true}}
+			<div id="gameContinue">Continue Playing</div>
+		    {{else}}
+	    <input class="btn-submit" id="gameStart" type="button" value="New Game">
+	    {{/ifeq}}
+
+	    {{jsonPrint this}}
+	    
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="account-content">{{> account}}</div>
+
+    <div role="tabpanel" class="tab-pane" id="map-content">{{> map}}</div>
+
+    {{!-- <div role="tabpanel" class="tab-pane" id="map-content">{{> map}}</div> --}}
+
+  </div>
+
+</div>	
+
+<script>
+
+$(function() {
+
+	var newGame = $('.btn-submit#gameStart');
+
+	newGame.on('click', function() {
+
+		var data = {};
+		data.userName = 'username';
+		
+		console.log("creating new game");
+
+		$.post("/api/new/", data, function(data){
+			// console.log (data, "data set");
+			 $('#app-content').html(data);
+    });
+
+	});
+});
+
+</script>

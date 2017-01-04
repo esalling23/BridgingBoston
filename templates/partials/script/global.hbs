@@ -1,0 +1,117 @@
+
+<script type="text/javascript">
+var socket;
+var section = $('.section-id');
+var sectionId = section.attr("id");
+
+$(document).ready(function () {
+
+	// var socket = io.connect('3000');
+  socket.on('connect',function(){
+    socket.emit('message', 'Hello server');
+  });
+
+	// DEBUG SCRIPT
+
+	var adminLogin = $('.btn-submit#admin');
+
+	adminLogin.click(function() {
+		console.log("admin login");
+
+			let data = {};
+			data.username = "admin";
+			data.password = "password";
+			$.get("/api/login/", data, function(data){
+				 $('#app-content').html(data);
+      });
+
+      socket.emit ('login:admin');
+		
+	});
+
+
+
+
+
+	// SIGN UP
+
+	if (sectionId === "signup") {
+
+		$('.btn-submit#signup').click(function(evt) {
+
+			var data = {};
+
+			data.username = $('#username').val();
+			data.password = $('#password').val();
+			data.email = $('#email').val();
+
+			console.log(data);
+
+			if (!data.password || !data.username || !data.email) {
+				console.log ("empty fields");
+				  
+				} else {
+					
+
+					$.post("/api/signup/", data, function(data){
+
+						console.log("trying to create player");
+	            
+          });
+				}
+
+		});
+
+	}
+
+	// LOGIN
+
+	if (sectionId === "login") {
+
+		$('.btn-submit#login').click(function(evt) {
+
+			var data = {};
+
+
+			// Grab username and password
+			data.username = $('#username').val();
+			data.password = $('#password').val();
+
+			// Check for missing data
+			if (!data.password || !data.username) {
+				  
+				} else {
+
+					$.get("/api/login/", data, function(data){
+
+						$('#app-content').html(data);
+
+          });
+				}
+
+		});
+
+		
+	}
+
+	// PROFILE
+
+	// if (sectionId === "profile") {
+
+	
+
+		
+
+	// }
+
+
+
+
+
+
+});
+  
+
+
+</script>
+

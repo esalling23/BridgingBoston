@@ -1,0 +1,22 @@
+<style>
+.sprite {
+	height: 300px;
+	width: 300px;
+	display: block;
+	animation: sprite .3s steps({{steps}}) infinite;
+}
+
+#{{sprite_key}} {
+	background-image:{{{cloudinaryUrl spriteSheet}}};
+}
+
+
+</style>
+
+{{jsonPrint this}}
+
+<div class="sprite" id="{{sprite_key}}"></div>
+
+
+
+    
