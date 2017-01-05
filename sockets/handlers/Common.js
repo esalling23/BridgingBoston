@@ -7,19 +7,14 @@ var Common = function (nsp, socket) {
     // Expose handler methods for events
     this.handler = {
 
-        'login:wrong_password': function(package) {
+        'login:error': function(package) {
 
             console.log(package);
 
             // Session.Get(package.gameId).
             // StartTutorial(currentSpace);
             
-        }, 
-
-        'login:admin': function(package) {
-            console.log("admin");
         }
-    
     };
 }
 

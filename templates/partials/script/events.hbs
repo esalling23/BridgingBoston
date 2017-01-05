@@ -1,0 +1,191 @@
+
+<script type="text/javascript">
+var socket;
+var section = $('.section-id');
+var sectionId = section.attr("id");
+
+$(document).ready(function () {
+
+
+
+	var eventIds = [
+
+			'connect', 
+			'message', 
+
+			'login:error',
+			'login:correct', 
+			'login:admin',
+
+			'game:new'
+		
+		];
+
+		var socketEvents = function(eventId, eventData) {
+			
+			switch (eventId) {
+
+				case 'connect': 
+
+					console.log("connected")
+
+					break;
+
+				case 'login:error':
+
+					console.log(eventData)
+
+					break;
+
+				case 'login:admin':
+
+					console.log("admin oaky")
+
+					break;
+
+				case 'message':
+					console.log(eventData);
+					break;
+			}
+
+		};
+
+	socket = io.connect({'forceNew': true});
+	registerEvents();
+
+  function registerEvents() {
+
+		$.each(eventIds, function(index, id) {
+		  
+		  socket.on(id, function(eventData) {
+
+				console.log("EVENT ID: ", id);
+				console.log("EVENT DATA: (" + eventData + ")");
+				
+				socketEvents(id, eventData);
+
+
+
+
+			 	// if(typeof(gameEvents) == "function")
+					// gameEvents(id, eventData);
+
+			});
+
+		});
+
+	}
+
+		
+
+
+	// DEBUG SCRIPT
+
+	var adminLogin = $('.btn-submit#admin');
+
+	adminLogin.click(function() {
+		// console.log("admin login");
+
+			let data = {};
+			data.username = "admin";
+			data.password = "password";
+			$.get("/api/login/", data, function(data){
+				$('#app-content').html(data);
+
+      });
+
+			
+
+      
+		
+	});
+
+
+
+
+
+
+
+	// SIGN UP
+
+	// if (sectionId === "signup") {
+
+		$('.btn-submit#signup').click(function(evt) {
+
+			var data = {};
+
+			data.username = $('#username').val();
+			data.password = $('#password').val();
+			data.email = $('#email').val();
+
+			// console.log(data);
+
+			if (!data.password || !data.username || !data.email) {
+				console.log ("empty fields");
+				socket.emit('login:error', 'Empty Fields');
+				  
+				} else {
+					
+
+					$.post("/api/signup/", data, function(data){
+
+						console.log("trying to create player");
+	            
+          });
+				}
+
+		});
+
+	// }
+
+	// LOGIN
+
+	if (sectionId === "login") {
+
+		$('.btn-submit#login').click(function(evt) {
+
+			var data = {};
+
+
+			// Grab username and password
+			data.username = $('#username').val();
+			data.password = $('#password').val();
+
+			// Check for missing data
+			if (!data.password || !data.username) {
+				  
+				} else {
+
+					$.get("/api/login/", data, function(data){
+
+						$('#app-content').html(data);
+
+          });
+				}
+
+		});
+
+		
+	}
+
+	// PROFILE
+
+	// if (sectionId === "profile") {
+
+	
+
+		
+
+	// }
+
+
+
+
+
+
+});
+  
+
+
+</script>
+

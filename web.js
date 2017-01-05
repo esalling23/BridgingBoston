@@ -1,4 +1,6 @@
 var keystone = require('keystone');
+var appServer = keystone.get('appServer');
+var rootDir = require('app-root-path');
 var handlebars = require('express-handlebars');
 var coreHelpers = require(__dirname + '/templates/helpers');
 
@@ -54,4 +56,39 @@ require('./models');
 
 keystone.set('routes', require('./routes'));
  
-keystone.start();
+var socketio = require('socket.io');
+
+// var socketio = require(rootDir + '/sockets/')(appServer);
+
+keystone.start({
+    onHttpServerCreated: function(){
+        keystone.set('io', socketio.listen(keystone.httpServer));
+        
+    },
+    onStart: function(){
+        var io = keystone.get('io');
+        var session = keystone.get('express session');
+        // require('./sockets/')();
+        // // Share session between express and socketio
+        io.use(function(socket, next){
+            session(socket.handshake, {}, next);
+        });
+
+
+        // // Socketio connection
+        io.on('connect', function(socket){
+            console.log('--- User connected');
+            
+        //     // Set session variables in route controller
+        //     // which is going to load the client side socketio
+        //     // in this case, ./routes/index.js
+        //     console.log(socket.handshake.session, " yah digg");
+            socket.emit('message', 'yah digg');
+
+
+            socket.on('disconnect', function(){
+                console.log('--- User disconnected');
+            });
+        });
+    }
+});

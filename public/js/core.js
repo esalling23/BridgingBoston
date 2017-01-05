@@ -20,80 +20,80 @@ $(function() {
 		console.log(sectionId + " is the section-id");
 	};
 
-	// var validateUser = function(isNew, info) {
-	// 	console.log ("validating...");
+	// // var validateUser = function(isNew, info) {
+	// // 	console.log ("validating...");
 
 
-	// 	addUser();
-	// };
+	// // 	addUser();
+	// // };
 
-	// var addUser = function() {
-	// 	console.log ("adding...");
-	// 	// let user = "bob";
-	// 	// let userEmail = "email";
-	// 	// let password = "pass";
+	// // var addUser = function() {
+	// // 	console.log ("adding...");
+	// // 	// let user = "bob";
+	// // 	// let userEmail = "email";
+	// // 	// let password = "pass";
 
 		
-	// };
+	// // };
 
 
-    // MAIN MENU
+ //    // MAIN MENU
 
-    var login = $('#login');
-    var signup = $('#signup');
-    var error = $('.error');
-    var user = $('#username');
-	var pass = $('#password');
-	var email = $('#email');
+ //    var login = $('#login');
+ //    var signup = $('#signup');
+ //    var error = $('.error');
+ //    var user = $('#username');
+	// var pass = $('#password');
+	// var email = $('#email');
     
-	login.click(function() {
-		// console.log ("user clicked 'login'!");
+	// login.click(function() {
+	// 	// console.log ("user clicked 'login'!");
 
-		if (section.attr("id") === "login"){
-    		if (user.val() === '' || pass.val() === '') {
-    			error.fadeIn();
-    			error.text ("Please fill out all fields!");
-    			error.addClass("red");
+	// 	if (section.attr("id") === "login"){
+ //    		if (user.val() === '' || pass.val() === '') {
+ //    			error.fadeIn();
+ //    			error.text ("Please fill out all fields!");
+ //    			error.addClass("red");
 
-    		} else {
-    			player.push({"username" : user.val(), "password" : pass.val()});
-    			console.log (JSON.stringify(player));
+ //    		} else {
+ //    			player.push({"username" : user.val(), "password" : pass.val()});
+ //    			console.log (JSON.stringify(player));
 
-    			// validateUser(false, player);
+ //    			// validateUser(false, player);
 
-    		}
-    	} else if (section.attr("id") === "signup") {
-    		error.fadeOut();
-    		email.fadeOut();
-    		user.attr("placeholder", "Username or Email");
-			sectionChange("login");
-		}
+ //    		}
+ //    	} else if (section.attr("id") === "signup") {
+ //    		error.fadeOut();
+ //    		email.fadeOut();
+ //    		user.attr("placeholder", "Username or Email");
+	// 		sectionChange("login");
+	// 	}
 	    	
-	});
+	// });
 
-	signup.click(function() {
-		console.log ("user clicked 'signup'!");
+	// signup.click(function() {
+	// 	console.log ("user clicked 'signup'!");
 
-		if (sectionId === "login"){
-	    		error.fadeOut();
+	// 	if (sectionId === "login"){
+	//     		error.fadeOut();
 
-    		email.fadeIn();
-    		user.attr("placeholder", "Username");
-    		sectionChange("signup");
-    	} else if (section.attr("id") === "signup") {
-	    	if (user.val() === '' || pass.val() === '' || email.val() === '') {
-    			error.fadeIn();
-    			error.text ("Please fill out all fields!");
-    			error.addClass("red");
+ //    		email.fadeIn();
+ //    		user.attr("placeholder", "Username");
+ //    		sectionChange("signup");
+ //    	} else if (section.attr("id") === "signup") {
+	//     	if (user.val() === '' || pass.val() === '' || email.val() === '') {
+ //    			error.fadeIn();
+ //    			error.text ("Please fill out all fields!");
+ //    			error.addClass("red");
 
-    		} else {
+ //    		} else {
 
-    			// validateUser();
+ //    			// validateUser();
 
-    		}
-    	}
+ //    		}
+ //    	}
 		
-	});
+	// });
 
 
 

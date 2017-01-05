@@ -2,11 +2,12 @@ var keystone = require('keystone');
 var Player = keystone.list('Player');
 var appRoot = require('app-root-path');
 var TemplateLoader = require('../../lib/TemplateLoader');
-var Common = require('../../sockets/handlers/Common.js')
 var Templates = new TemplateLoader();
 var _ = require('underscore');
-var app = require('http').createServer(Common);
-var io = require('socket.io')(app);
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var fs = require('fs');
 
 
@@ -58,8 +59,11 @@ exports.get = function(req, res) {
 	        }); 
 
 			  } else {
+
+			  	// res.apiResponse('wrong password');
+			  	
+			  	io.emit("login:error", req.query.username);
 			  	console.log("wrong password");
-			  	io.emit("login:wrong_password");
 			  }
 	  });
 		// pass._.compare(passwordInput)
