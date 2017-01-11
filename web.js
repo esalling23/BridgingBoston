@@ -86,6 +86,14 @@ keystone.start({
             socket.emit('message', 'yah digg');
 
 
+            socket.on('login:admin', function(){
+              console.log("admin login");
+              socket.emit('client:admin', function(){
+
+              });
+            });
+
+
             socket.on('disconnect', function(){
                 console.log('--- User disconnected');
             });
