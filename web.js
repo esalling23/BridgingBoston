@@ -83,14 +83,11 @@ keystone.start({
         //     // which is going to load the client side socketio
         //     // in this case, ./routes/index.js
         //     console.log(socket.handshake.session, " yah digg");
-            socket.emit('message', 'yah digg');
+            socket.emit('message', 'Socket setup');
 
 
             socket.on('login:admin', function(){
-              console.log("admin login");
-              socket.emit('client:admin', function(){
-
-              });
+              socket.emit('client:admin');
             });
 
 

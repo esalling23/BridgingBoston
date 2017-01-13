@@ -5,5 +5,8 @@ var keystone = require('keystone'),
 exports.create = {
 	User: [
 	  { 'name.first': 'Dev', 'name.last': 'User', email: 'user@admin.edu', password: 'admin', isAdmin: true }
+	], 
+	Player: [
+	  {'userName': 'user', 'email': 'email@email.com', 'passWord': 'password'}
 	]
 };

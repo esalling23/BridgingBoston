@@ -62,7 +62,7 @@ exports.get = function(req, res) {
 
 			  	// res.apiResponse('wrong password');
 			  	
-			  	io.emit("login:error", req.query.username);
+			  	// io.emit("login:error", req.query.username);
 			  	console.log("wrong password");
 			  }
 	  });

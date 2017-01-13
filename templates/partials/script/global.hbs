@@ -20,7 +20,14 @@ $(document).ready(function () {
 	});
 
 	socket.on('client:admin', function(){
-		console.log("admin login");
+		let data = {};
+			data.username = "admin";
+			data.password = "password";
+			$.get("/api/login/", data, function(data){
+				$('#app-content').html(data);
+
+      });
+
 	});
 
 	socket.on('connect', function(){
@@ -40,22 +47,9 @@ $(document).ready(function () {
 	var adminLogin = $('.btn-submit#admin');
 
 	adminLogin.click(function() {
-		// console.log("admin login");
-			socket.emit('login:admin', function(){
-				console.log("firing admin event");
-			});
-			let data = {};
-			data.username = "admin";
-			data.password = "password";
-			$.get("/api/login/", data, function(data){
-				$('#app-content').html(data);
-
-      });
-
-			
-
-      
-		
+		socket.emit('login:admin', function(){
+			console.log("firing admin event");
+		});
 	});
 
 
