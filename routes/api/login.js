@@ -58,10 +58,11 @@ exports.get = function(req, res) {
 
 			  } else {
 
-
-
 			  	return res.apiError('error', 'wrong password');
 			  	locals.section = 'login:error';
+			  	// res.apiResponse('wrong password');
+			  	
+			  	// io.emit("login:error", req.query.username);
 			  	console.log("wrong password");
 
 			  }
