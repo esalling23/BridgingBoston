@@ -60,7 +60,7 @@ exports.get = function(req, res) {
 
 			  } else {
 
-			  	// res.apiResponse('wrong password');
+			  	res.apiResponse('wrong password');
 			  	
 			  	// io.emit("login:error", req.query.username);
 			  	console.log("wrong password");

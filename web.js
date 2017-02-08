@@ -45,7 +45,7 @@ keystone.init({
   'user model': 'User',
   'cookie secret': '(your secret here)', 
 
-  'cloudinary config': { cloud_name: 'esalling', api_key: '723551514692962', api_secret: 'syiIllz2Vf6VglCJWRDZFsNafD8' }, 
+  'cloudinary config': { cloud_name: 'esalling', api_key: '723551514692962', api_secret: 'syiIllz2Vf6VglCJWRDZFsNafD8esallingesal' }, 
   'cloudinary prefix': 'keystone',
   'cloudinary folders': true,
   'cloudinary secure': true
