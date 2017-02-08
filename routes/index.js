@@ -1,6 +1,8 @@
 var keystone = require('keystone'),
     middleware = require('./middleware'),
     importRoutes = keystone.importer(__dirname);
+
+
  
 // Common Middleware
 keystone.pre('routes', middleware.initErrorHandlers);
@@ -33,7 +35,7 @@ exports = module.exports = function(app) {
     
     app.get('/', routes.views.index);
 
-    app.get('/api/login/', keystone.middleware.api, routes.api.login.get);
+    app.post('/api/login/', keystone.middleware.api, routes.api.login.get);
 
     app.post('/api/signup/', keystone.middleware.api, routes.api.signup.create);
 

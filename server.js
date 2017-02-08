@@ -1,8 +1,7 @@
 var express = require('express'),
 	expressHbs = require('express-handlebars');
 var app = express();
-var server = http.createServer(app);
-// var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(app.listen(3000));
 server.listen(app.get('port'));
 
 app.set('port', process.env.PORT || 3000);
@@ -15,6 +14,7 @@ app.engine('hbs', expressHbs({extname:'hbs', defaultLayout:'base.hbs', layoutsDi
 app.set('view engine', 'hbs');
 
 app.get('/', function(req, res){
+	req.io = io;
   res.render('index');
   res.sendfile(__dirname + '/index.html');
 });

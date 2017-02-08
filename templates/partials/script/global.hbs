@@ -23,7 +23,7 @@ $(document).ready(function () {
 		let data = {};
 			data.username = "admin";
 			data.password = "password";
-			$.get("/api/login/", data, function(data){
+			$.post("/api/login/", data, function(data){
 				$('#app-content').html(data);
 
       });
@@ -35,6 +35,10 @@ $(document).ready(function () {
 		socket.emit('message', 'heres another connection message');
 	});
 
+	socket.on('game:new', function(){
+		console.log('player login');
+		// socket.emit('message', 'heres another connection message');
+	});
 	
 
 	
@@ -42,25 +46,73 @@ $(document).ready(function () {
 		
 
 
-	// DEBUG SCRIPT
 
-	var adminLogin = $('.btn-submit#admin');
+	
 
-	adminLogin.click(function() {
-		socket.emit('login:admin', function(){
-			console.log("firing admin event");
+
+{{#ifeq section "login:error"}}
+	console.log("login error");
+{{/ifeq}}
+
+
+
+
+
+	// LOGIN AND SIGNUP
+
+	{{#ifeq section "home"}}
+
+		var adminLogin = $('.btn-submit#admin');
+
+		adminLogin.click(function() {
+			socket.emit('login:admin', function(){
+				console.log("firing admin event");
+			});
 		});
-	});
 
+		$('.btn-submit#login').click(function(evt) {
 
+			var data = {};
 
+			$('.btn-submit#login').addClass('is-active');
+			$('.btn-submit#signup').removeClass('is-active');
 
+			// Grab username and password
+			data.username = $('#username').val();
+			data.password = $('#password').val();
 
+			// Check for missing data
+			if (!data.password || !data.username) {
+				  
+				} else {
 
+					$.post("/api/login/", data, function(data){
 
-	// SIGN UP
+						$('#app-content').html(data);
 
-	// if (sectionId === "signup") {
+          });
+
+         //  $.post( 
+							  // 	"/api/create/" + $(evt.currentTarget).data().type,
+									// data,
+									// function( data ) {
+
+									// 	if(data.error_code !== undefined) {
+
+									// 		// if(data.error_code === 'need_content')
+									// 			// $('#session-create #categories').addClass('invalid');
+											
+									// 		$('#session-create .error').text(data.msg).fadeIn();
+											
+									// 		return;
+									// 	}
+
+									//   window.location = data;
+									// }
+								// });
+				}
+
+		});
 
 		$('.btn-submit#signup').click(function(evt) {
 
@@ -88,47 +140,12 @@ $(document).ready(function () {
 
 		});
 
-	// }
-
-	// LOGIN
-
-	if (sectionId === "login") {
-
-		$('.btn-submit#login').click(function(evt) {
-
-			var data = {};
-
-
-			// Grab username and password
-			data.username = $('#username').val();
-			data.password = $('#password').val();
-
-			// Check for missing data
-			if (!data.password || !data.username) {
-				  
-				} else {
-
-					$.get("/api/login/", data, function(data){
-
-						$('#app-content').html(data);
-
-          });
-				}
-
-		});
-
 		
-	}
+	{{/ifeq}}
 
-	// PROFILE
-
-	// if (sectionId === "profile") {
+	// GAME
 
 	
-
-		
-
-	// }
 
 
 
